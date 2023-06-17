@@ -1,9 +1,10 @@
 import { createRoot } from "react-dom/client";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Details from "./Details";
 import * as Test from "react-final-form-toolkit";
 import AppProvider from "./AppProvider";
 import TaskPage from "./pages/tasks/TaskPage";
+import NoLibApp from "./a-no-lib/NoLibApp";
 console.log(Test);
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/details/:id" element={<Details />} />
         <Route path="/" element={<TaskPage />} />
+        <Route path="1" element={<NoLibApp />} />
       </Routes>
     </AppProvider>
   );
