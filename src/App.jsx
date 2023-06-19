@@ -5,7 +5,6 @@ import * as Test from "react-final-form-toolkit";
 import AppProvider from "./AppProvider";
 import TaskPage from "./pages/tasks/TaskPage";
 import NoLibApp from "./a-no-lib/NoLibApp";
-console.log(Test);
 const App = () => {
   return (
     <AppProvider>

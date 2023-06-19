@@ -7,6 +7,22 @@ body {
   background-color: #81a69b;
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 12px;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5px;
+}
+
+ul {
+  padding-inline-start: 0;
+}
+
+li {
+  list-style-type: none;
 }
 
 .search-params {
