@@ -13,10 +13,7 @@ function Header(props) {
       isCompleted: false,
     };
     if (name) {
-      setTasks((oldValues) => ({
-        ...oldValues,
-        [id]: task,
-      }));
+      setTasks((oldValues) => [...oldValues, task]);
       ref.current.value = "";
     }
     e.preventDefault();

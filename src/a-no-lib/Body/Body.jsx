@@ -6,8 +6,9 @@ function Body(props) {
   const acquireHandleClick = (task) => (e) => {
     const { id } = task;
     setTasks((oldTasks) => {
-      const tasks = { ...oldTasks };
-      tasks[id].isCompleted = e.target.checked;
+      const tasks = [ ...oldTasks ];
+      const i = tasks.findIndex(task => task.id === id)
+      tasks[i].isCompleted = e.target.checked;
       return tasks;
     });
   };

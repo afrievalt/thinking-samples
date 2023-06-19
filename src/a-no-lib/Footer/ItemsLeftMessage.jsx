@@ -2,7 +2,7 @@ import React from "react";
 
 function ItemsLeftMessage(props) {
   const { tasks } = props;
-  const activeTasks = Object.values(tasks).filter(({ isCompleted }) => {
+  const activeTasks = tasks.filter(({ isCompleted }) => {
     return isCompleted === false;
   });
   const activeCount = activeTasks.length
