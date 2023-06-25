@@ -5,6 +5,7 @@ import AppProvider from "./AppProvider";
 import TaskPage from "./pages/tasks/TaskPage";
 import NoLibApp from "./a-no-lib/NoLibApp";
 import NoLibApp4 from "./a-no-lib-4/NoLibApp";
+import NoLibApp2 from "./a-no-lib-2/NoLibApp";
 import NoLibAppLookup from "./a-no-lib-5-lookup/NoLibApp";
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" element={<TaskPage />} />
         <Route path="1" element={<NoLibApp />} />
         <Route path="4" element={<NoLibApp4 />} />
+        <Route path="2" element={<NoLibApp2 />} />
         <Route path="lookup" element={<NoLibAppLookup />} />
       </Routes>
     </AppProvider>
