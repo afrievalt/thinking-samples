@@ -1,26 +1,18 @@
 import { createRoot } from "react-dom/client";
-import { Routes, Route } from "react-router-dom";
-import Details from "./Details";
-import AppProvider from "./AppProvider";
-import TaskPage from "./pages/tasks/TaskPage";
-import NoLibApp from "./a-no-lib/NoLibApp";
-import NoLibApp4 from "./a-no-lib-4/NoLibApp";
-import NoLibApp2 from "./a-no-lib-2/NoLibApp";
-import NoLibAppLookup from "./a-no-lib-5-lookup/NoLibApp";
-const App = () => {
+import React from "react";
+import Body from "./Body";
+import Header from "./Header";
+import Footer from "./Footer";
+
+function App() {
   return (
-    <AppProvider>
-      <Routes>
-        <Route path="/details/:id" element={<Details />} />
-        <Route path="/" element={<TaskPage />} />
-        <Route path="1" element={<NoLibApp />} />
-        <Route path="4" element={<NoLibApp4 />} />
-        <Route path="2" element={<NoLibApp2 />} />
-        <Route path="lookup" element={<NoLibAppLookup />} />
-      </Routes>
-    </AppProvider>
+    <div>
+      <Header />
+      <Body />
+      <Footer />
+    </div>
   );
-};
+}
 
 const container = document.getElementById("root");
 const root = createRoot(container);
