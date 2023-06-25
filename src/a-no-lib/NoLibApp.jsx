@@ -47,8 +47,7 @@ function NoLibApp() {
         setFilter={setFilter}
         tasks={tasks}
         setTasks={setTasks}
-      />
-      
+      />      
     </div>
   );
 }

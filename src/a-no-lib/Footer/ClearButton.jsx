@@ -6,6 +6,9 @@ function ClearButton(props) {
   const handleClickClear = () => {
     setTasks((oldTasks) => oldTasks.filter(({ isCompleted }) => !isCompleted));
   };
+  if (completeCount === 0) {
+    return null;
+  }
   return (
     <button onClick={handleClickClear}>Clear Complete {completeCount}</button>
   );

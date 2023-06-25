@@ -2,16 +2,22 @@ import React from "react";
 import Task from "./Task";
 
 function Body(props) {
+  /* 
+    Danger: Do not copy.
+    I'm intentionally introducing some anti-patterns to improve later.
+    Can you find them?
+  */
   const { tasks, setTasks } = props;
-  const acquireHandleClick = (task) => (e) => {
-    const { id } = task;
-    setTasks((oldTasks) => {
-      const tasks = [ ...oldTasks ];
-      const i = tasks.findIndex(task => task.id === id)
-      tasks[i].isCompleted = e.target.checked;
-      return tasks;
-    });
-  };
+  const acquireHandleClick =
+    (task) =>
+    // return a callback to handle click
+    (e) => {
+      const { id } = task;
+      const newTasks = [...tasks];  // make a shallow copy 
+      const i = newTasks.findIndex((task) => task.id === id); // find tasks to update
+      newTasks[i].isCompleted = e.target.checked; // update new task
+      setTasks(newTasks); // set new tasks
+    };
   return (
     <section className="inline">
       <ul>

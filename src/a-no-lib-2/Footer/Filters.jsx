@@ -1,8 +1,8 @@
 import React from "react";
 import FilterButton from "./FilterButton";
 
-function Filters(props) {
-  const { filter } = props;
+function Filters() {
+  const filter = "All";
   return (
     <div>
       <FilterButton value="All" filter={filter} />

@@ -3,7 +3,7 @@ import Body from "./Body";
 import { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-const initState = [
+const tasks = [
   { id: 1, name: "Learn JavaScript", isCompleted: true },
   { id: 2, name: "Learn React Fundamentals", isCompleted: true },
   {
@@ -28,9 +28,8 @@ const initState = [
   },
   { id: 7, name: "Learn to build Adaptive Components", isCompleted: false },
 ];
+const filter = "All";
 function NoLibApp() {
-  const [tasks, setTasks] = useState(initState);
-  const [filter, setFilter] = useState("All");
   const isCompletedFilter = filter === "Completed";
   const displayTasks = tasks.filter(({ isCompleted }) => {
     if (filter === "All") {
@@ -40,15 +39,9 @@ function NoLibApp() {
   });
   return (
     <div>
-      <Header setTasks={setTasks} />
-      <Body tasks={displayTasks} setTasks={setTasks} />
-      <Footer
-        filter={filter}
-        setFilter={setFilter}
-        tasks={tasks}
-        setTasks={setTasks}
-      />
-      
+      <Header />
+      <Body tasks={displayTasks} />
+      <Footer filter={filter} tasks={tasks} />
     </div>
   );
 }
