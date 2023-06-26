@@ -3,12 +3,14 @@ import Filters from "./Filters";
 import ItemsLeftMessage from "./ItemsLeftMessage";
 import ClearButton from "./ClearButton";
 
-function Footer() {
+function Footer(props) {
+  const { tasks, filter } = props;
+  
   return (
     <footer className="inline">
-      <ItemsLeftMessage />
-      <Filters />
-      <ClearButton />
+      <ItemsLeftMessage tasks={tasks} />
+      <Filters filter={filter} />
+      <ClearButton tasks={tasks} />
     </footer>
   );
 }

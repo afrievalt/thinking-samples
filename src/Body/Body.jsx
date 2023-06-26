@@ -1,13 +1,20 @@
 import React from "react";
 import Task from "./Task";
 
-function Body() {
+function Body(props) {
+  const { tasks } = props;
   return (
     <section className="inline">
       <ul>
-        <Task name="Learn JavaScript" isCompleted={true} />
-        <Task name="Learn React Fundamentals" isCompleted={true} />
-        <Task name="Learn Thinking in React Fundamentals" isCompleted={false} />
+        {tasks.map((task) => {
+          return (
+            <Task
+              key={task.id}
+              name={task.name}
+              isCompleted={task.isCompleted}              
+            />
+          );
+        })}
       </ul>
     </section>
   );

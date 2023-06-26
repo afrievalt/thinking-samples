@@ -1,8 +1,13 @@
 import React from "react";
 
-function ClearButton() {
+function ClearButton(props) {
+  const { tasks } = props;
+  const completeCount = tasks.filter(({ isCompleted }) => isCompleted).length;
+  if (completeCount === 0) {
+    return null;
+  }
   return (
-    <button >Clear Complete 2</button>
+    <button >Clear Complete {completeCount}</button>
   );
 }
 
