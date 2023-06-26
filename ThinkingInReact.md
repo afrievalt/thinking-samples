@@ -1,7 +1,7 @@
 Thinking in React at scale contains three major concepts.
 
 1. Composing components from smaller components.
-2.  Transforming the state you have into the state if you need.  
+2. Transforming the state you have into the state if you need.  
 3. Managing state
 
 These concepts may seem obvious and over-simplistic but are too often ignored. I've reviewed over 1,000,000 lines of code in my 30-year career and too often see verbose, overly complicated code that is difficult to grok or change. Short, simple alternatives are preferred.
@@ -41,7 +41,7 @@ function Body() {
 ```
 
 Task uses the hard coded values supplied by props
-```
+```jsx
 function Task(props) {
   const { name, isCompleted, onClick } = props;
 
@@ -57,7 +57,7 @@ function Task(props) {
 ```
 
 App follows 3 section layout discovered in step one. 
-```
+```jsx
 function App() {
   return (
     <div>
@@ -69,7 +69,7 @@ function App() {
 }
 ```
 
-The app on [code sandbox](https://codesandbox.io/p/github/afrievalt/thinking-samples/step2).  
+The app so far on [code sandbox](https://codesandbox.io/p/github/afrievalt/thinking-samples/step2).  
 
 
 ------------
@@ -78,19 +78,14 @@ The app on [code sandbox](https://codesandbox.io/p/github/afrievalt/thinking-sam
 From the hard coded values discovered in the previous step, build the minimal state.
 
 In our example, we have a list of tasks:
-```
+```js
 const initialState = [
     { id: 1, name: "Learn JavaScript", isCompleted: true },
     { id: 2, name: "Learn React Fundamentals", isCompleted: true },
     …
 ```
 
-And a string filter that can be one of "All", "Completed" or "Active"
-
-```
-const [tasks, setTasks] = useState(initialState);
-const [filter, setFilter] = useState("All");
-```
+Our second and final pice of state is a string filter that can be one of "All", "Completed" or "Active"
 
 Notice some dynamic values appear on the screen that are not in the minimum state.  These values are derived from our minimum state.  Misidentifying derived values is a common mistake to watch out for.   
 ![Alt text](doc-img/DerivedState.png)
@@ -99,3 +94,49 @@ Notice some dynamic values appear on the screen that are not in the minimum stat
 ### Step 4: Transform the state you have into the values you need.
 
 First we will apply our filters to our task list.
+```js
+  // App.js
+  const isCompletedFilter = filter === "Completed";
+  // filter out tasks that are not displayed
+  const displayTasks = tasks.filter(({ isCompleted }) => {
+    // if "All" show all
+    if (filter === "All") {
+      return true;
+    }
+    // if "Completed" show only completed, if "Active" show only completed === false
+    return isCompleted === isCompletedFilter;
+  });
+```
+
+Next we will calculate the Active Count
+```js
+  // ItemsLeftMessage.js
+  const activeTasks = tasks.filter(({ isCompleted }) => {
+    return isCompleted === false;
+  });
+  const activeCount = activeTasks.length
+```
+We also disable the selected filter
+```js
+// FilterButton.jsx
+// value prop is the button value ("All") and filter prop is the current user selected filter. 
+const isDisabled = value === filter;
+```
+
+Then we calculate the Completed count.  And finally hide the clear button when there are no completed items.
+
+```jsx
+function ClearButton(props) {
+  const { tasks } = props;
+  const completeCount = tasks.filter(({ isCompleted }) => isCompleted).length;
+  if (completeCount === 0) {
+    return null;
+  }
+  return (
+    <button >Clear Complete {completeCount}</button>
+  );
+}
+```
+The app so far on [code sandbox](https://codesandbox.io/p/github/afrievalt/thinking-samples/step4).  
+
+At this point, the user is unable to modify state, but you can change the state to see how it effects the screen.  In App.js, change the filter from "All" to "Active".  Change a task from isCompleted: false to true.
