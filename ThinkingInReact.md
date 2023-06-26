@@ -56,10 +56,7 @@ function Task(props) {
 }
 ```
 
-
-
-
-Page follows 3 section layout discovered in steep one. 
+App follows 3 section layout discovered in step one. 
 ```
 function App() {
   return (
@@ -71,6 +68,9 @@ function App() {
   );
 }
 ```
+
+The app on [code sandbox](https://codesandbox.io/p/github/afrievalt/thinking-samples/step2).  
+
 
 ------------
 ### Step 3: Identify the minimum state.
@@ -88,9 +88,14 @@ const initialState = [
 And a string filter that can be one of "All", "Completed" or "Active"
 
 ```
-const [tasks, setTasks] = useState(initState);
+const [tasks, setTasks] = useState(initialState);
 const [filter, setFilter] = useState("All");
 ```
 
-Notice some dynamic values appear on the screen that are not in the minimum state.  These values are derived from our minimum state.  
+Notice some dynamic values appear on the screen that are not in the minimum state.  These values are derived from our minimum state.  Misidentifying derived values is a common mistake to watch out for.   
 ![Alt text](doc-img/DerivedState.png)
+
+---
+### Step 4: Transform the state you have into the values you need.
+
+First we will apply our filters to our task list.
