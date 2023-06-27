@@ -36,7 +36,7 @@ Next we build the content of our components without worrying about interactivity
 
 It is not necessary to build all the rows. Here we cover both cases, checked and unchecked.
 
-```
+```jsx
 function Body() {
   return (
     <section className="inline">
