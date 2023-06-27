@@ -6,6 +6,7 @@ function Body(props) {
     Danger: Do not copy.
     I'm intentionally introducing some anti-patterns to improve later.
     Can you find them?
+    // https://jkettmann.com/how-to-accidentally-mutate-state-and-why-not-to
   */
   const { tasks, setTasks } = props;
   const acquireHandleClick =
