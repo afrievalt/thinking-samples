@@ -2,7 +2,23 @@ import React from "react";
 import Task from "./Task";
 
 function Body(props) {
-  const { tasks } = props;
+  /* 
+    Danger: Do not copy.
+    I'm intentionally introducing some anti-patterns to improve later.
+    Can you find them?
+    // https://jkettmann.com/how-to-accidentally-mutate-state-and-why-not-to
+  */
+  const { tasks, setTasks } = props;
+  const acquireHandleClick =
+    (task) =>
+    // return a callback to handle click
+    (e) => {
+      const { id } = task;
+      const newTasks = [...tasks];  // make a shallow copy 
+      const i = newTasks.findIndex((task) => task.id === id); // find tasks to update
+      newTasks[i].isCompleted = e.target.checked; // update new task
+      setTasks(newTasks); // set new tasks
+    };
   return (
     <section className="inline">
       <ul>
@@ -11,7 +27,8 @@ function Body(props) {
             <Task
               key={task.id}
               name={task.name}
-              isCompleted={task.isCompleted}              
+              isCompleted={task.isCompleted}
+              onClick={acquireHandleClick(task)}
             />
           );
         })}

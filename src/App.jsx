@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 
 import Body from "./Body";
 import Header from "./Header";
 import Footer from "./Footer";
-const tasks = [
+
+const initState = [
   { id: 1, name: "Learn JavaScript", isCompleted: true },
   { id: 2, name: "Learn React Fundamentals", isCompleted: true },
   {
@@ -29,8 +30,9 @@ const tasks = [
   },
   { id: 7, name: "Learn to build Adaptive Components", isCompleted: false },
 ];
-const filter = "All";
 function App() {
+  const [tasks, setTasks] = useState(initState);
+  const [filter, setFilter] = useState("All");
   const isCompletedFilter = filter === "Completed";
   const displayTasks = tasks.filter(({ isCompleted }) => {
     if (filter === "All") {
@@ -40,9 +42,14 @@ function App() {
   });
   return (
     <div>
-      <Header />
-      <Body tasks={displayTasks} />
-      <Footer filter={filter} tasks={tasks} />
+      <Header setTasks={setTasks} />
+      <Body tasks={displayTasks} setTasks={setTasks} />
+      <Footer
+        filter={filter}
+        setFilter={setFilter}
+        tasks={tasks}
+        setTasks={setTasks}
+      />      
     </div>
   );
 }
