@@ -7,6 +7,7 @@ Thinking in React at scale contains three major concepts.
 These concepts may seem obvious and over-simplistic but are too often ignored. I've reviewed over 1,000,000 lines of code in my 30-year career and too often see verbose, overly complicated code that is difficult to grok or change. Short, simple alternatives are preferred.
 
 Here is the screen we are going to build:
+
 ![Alt text](doc-img/raw.png)
 
 ---
@@ -14,10 +15,15 @@ Here is the screen we are going to build:
 ### Step 1: Break down your screen into components
 
 This page has 3 sections, header, body and footer.
+
 ![Alt text](doc-img/App.png)
+
 Each section can be further broken into smaller components:
+
 ![Alt text](doc-img/Header.png)
+
 ![Alt text](doc-img/Body.png)
+
 ![Alt text](doc-img/Footer.png)
 
 There is no one way to break apart the screen and I often change my mind when I learn more during implementation. The important thing is to avoid large monolithic components.
@@ -221,7 +227,7 @@ function Header(props) {
 }
 ```
 
-Second lets handle marking a completing as complete.
+Second lets handle marking a task as complete.
 
 ```jsx
 function Body(props) {
@@ -260,3 +266,43 @@ function Body(props) {
 }
 ```
 
+Now, lets remove completed tasks.
+
+```jsx
+function ClearButton(props) {
+  const { tasks, setTasks } = props;
+  const completeCount = tasks.filter(({ isCompleted }) => isCompleted).length;
+  const handleClickClear = () => {
+    setTasks((oldTasks) => oldTasks.filter(({ isCompleted }) => !isCompleted));
+  };
+  if (completeCount === 0) {
+    return null;
+  }
+  return (
+    <button onClick={handleClickClear}>Clear Complete {completeCount}</button>
+  );
+}
+```
+
+And finally, lets set the filters.
+
+```jsx
+function FilterButton(props) {
+  const { value, filter, setFilter } = props;
+  const handleClick = () => {
+    // we can use closure here because our new state is not dependent on old state
+    setFilter(value);
+  };
+
+  const isDisabled = value === filter;
+  return (
+    <button disabled={isDisabled} onClick={handleClick}>
+      {value}
+    </button>
+  );
+}
+```
+
+The app so far on [code sandbox](https://codesandbox.io/p/github/afrievalt/thinking-samples/step5).
+
+(Coming soon.) Next we will add some libraries, improve our code, and handle additional requirements.
